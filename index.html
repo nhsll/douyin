@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/duanzi.css"/>
+		<meta name="viewport" content="width=375,user-scalable=no" />
+	</head>
+	<body>
+		<div class="videoList">
+			<!--<div class="videoItem">
+				<div class="videoTop">
+					<div class="img" style="background-image: url(http://wimg.spriteapp.cn/picture/2019/1009/5d9d74da32a09_wpd.jpg);"></div>
+					<button></button>
+					<h3 class="title">好像有什么不对劲</h3>
+					<p><span class="icon"></span><span class="num">10次</span></p>
+				</div>
+				<div class="videoBottom">
+					<img src="http://wimg.spriteapp.cn/profile/large/2019/07/04/5d1dafddd0d35_mini.jpg" class="headerImg" />
+					<div class="right">
+						<div class="author">最后一排的男生</div>
+						<div class="comment">以前我也这样玩过的。不过多了，就不灵了。</div>
+					</div>
+				</div>
+			</div>-->
+		</div>
+		
+		<div class="playPage">
+			<video class="video" src="" controls="controls"></video>
+			<div class="closed"></div>
+		</div>
+		<div class="shuaxin">刷新列表</div>
+		
+		<script src="js/getAjax.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		var videoListDom = document.querySelector(".videoList")
+		var playPageDom = document.querySelector(".playPage")
+		var closeBtn = document.querySelector(".closed")
+		var videoDom = document.querySelector(".video")
+		var shuaxin = document.querySelector(".shuaxin")
+
+		var pageCount = 1;
+		
+			var httpUrl = "https://api.apiopen.top/getJoke?page=1&count=10&type=video"
+			GetAjax(httpUrl,function(xhr){
+				var resultObj = JSON.parse(xhr.response);
+				videoList = resultObj.result;
+				renderVideoList(videoList)
+				
+			})
+			
+			
+			//循环渲染视频列表
+			function renderVideoList(videoList){
+				 videoList.forEach(function(item,index){
+				 	var videoItem = document.createElement("div")
+				 	videoItem.className = "videoItem"
+				 	videoItem.innerHTML = `
+				 	<div class="videoTop">
+					<div class="img" style="background-image: url(${item.thumbnail});"></div>
+					<button type="button" data-index="${index}"></button>
+					<h3 class="title">${item.text}</h3>
+					<p>
+						<span class="icon"></span>
+						<span class="num">${item.up}</span>次播放
+					</p>
+				</div>
+				<div class="videoBottom">
+					<img src="${item.header}" class="headerImg"/>
+					<div class="right">
+						<div class="author">${item.top_comments_name}</div>
+						<div class="comment">${item.top_comments_content}</div>
+					</div>
+				</div>
+				 	`
+				 	videoListDom.appendChild(videoItem)
+				 })
+			}
+			
+			
+			videoListDom.addEventListener("click",function(event){
+				if(event.target.tagName =="BUTTON"){
+					var index = event.target.dataset.index
+					playPageDom.style.display = 'block'
+					videoDom.src = videoList[index].video
+					videoDom.play()
+				}
+			})
+			
+			closeBtn.onclick = function(){
+				playPageDom.style.display = 'none'
+				videoDom.pause()
+			}
+			
+			
+			shuaxin.onclick = function(){
+				pageCount++
+				var httpUrl = "https://api.apiopen.top/getJoke?page="+pageCount+"&count=10&type=video"
+				GetAjax(httpUrl,function(xhr){
+					var result = xhr.response
+					//下面的video不能加var ，如果加了视频地址就会和page1的一样，虽然封面不一样，但是视频一样
+					videoList = JSON.parse(result).result
+					videoListDom.innerHTML = ""
+					renderVideoList(videoList)
+					window.scrollTo(0,0)
+				})
+			}
+		</script>
+	</body>
+</html>

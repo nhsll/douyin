@@ -1,0 +1,126 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.videoList{
+	width: 375px;
+}
+
+.videoItem .videoTop{
+	width: 375px;
+	height: 275px;
+	position: relative;
+}
+.videoItem .videoTop .img{
+	width: 375px;
+	height: 275px;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #000000;
+}
+.videoItem .videoTop button{
+	width: 375px;
+	height: 275px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: rgba(0,0,0,0.4);
+	background-image: url(../img/play.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 60px 60px;
+}
+.videoItem .videoTop .title{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 375px;
+	font-size: 16px;
+	color: #FFFFFF;
+	padding: 20px;
+}
+.videoItem .videoTop p .icon{
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	background-image: url(../img/eye.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 30px auto;
+}
+.videoItem .videoTop p .num{
+	display: inline-block;
+	margin-left: 5px;
+}
+.videoItem .videoTop p{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: #FFFFFF;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 15px;
+}
+.videoItem .videoBottom{
+	width: 375px;
+	height: 60px;
+	display: flex;
+	align-items: center;
+}
+.videoBottom .headerImg{
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	margin: 0 16px;
+}
+.videoItem .videoBottom .right{
+	height: 60px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.videoItem .videoBottom .right .author{
+	font-size: 14px;
+}
+.videoItem .videoBottom .right .comment{
+	font-size: 14px;
+	color: #999999;
+}
+.playPage{
+	width: 375px;
+	background: rgba(0,0,0,0.7);
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+}
+.playPage video{
+	width: 100vw;
+	height: 100vh;
+}
+.closed{
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	width: 30px;
+	height: 30px;
+	background-image: url(../img/searchclose.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 30px 30px;
+	border-radius: 15px;
+	background-color:#000000;
+}
+.shuaxin{
+	width: 100%;
+	height: 40px;
+	background: #CCCCCC;
+	font-size: 16px;
+	text-align: center;
+	line-height: 40px;
+	color: #666666;
+}
